@@ -1,0 +1,22 @@
+{
+  "name": "jamesmariodavis",
+  "version": "1.0.0",
+  "description": "static website",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.0",
+    "express": "^4.13.4",
+    "gulp": "^3.9.1",
+    "gulp-debug": "^2.1.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-swig": "^0.8.0",
+    "run-sequence": "^1.1.5",
+    "swig": "^1.4.2"
+  },
+  "scripts": {
+    "gulp": "gulp"
+  },
+  "author": "",
+  "license": "ISC"
+}
