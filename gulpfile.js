@@ -20,7 +20,17 @@ var paths = {
     templates: './src/templates',
     css: './src/css',
     scripts: './scripts'
-}
+};
+
+
+var swigTexTags = require('./src/swig-tex/tags');
+var swigTexFilters = require('./src/swig-tex/filters');
+
+var swigOpts = {
+    setup: function (swig) {
+        swig.setFilter('sortOnKey', swigTexFilters.swigSortOnKey);
+    }
+};
 
 
 gulp.task('start-server', function() {
@@ -31,35 +41,7 @@ gulp.task('start-server', function() {
     app.listen(4000);
 });
 
-gulp.task('compile-html', function() {
-
-    function swigSortOnKey(input, sortKey, reverse) {
-        if (!input){
-            return input
-        }
-        function compare(a, b) {
-            if (a[sortKey] < b[sortKey])
-                return -1;
-            else if (a[sortKey] > b[sortKey])
-                return 1;
-            else
-                return 0;
-        }
-        var sorted = input.sort(compare)
-        if (reverse){
-            return sorted.reverse()
-        }
-        else {
-            return sorted
-        }
-    }
-    
-    var swigOpts = {
-        setup: function (swig) {
-            swig.setFilter('sortOnKey', swigSortOnKey);
-        }
-    }
-    
+gulp.task('compile-html', function() {    
     return gulp.src('./src/**/*.html')
         .pipe(gulpSwig(swigOpts))
         .pipe(gulp.dest('./build'));
